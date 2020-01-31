@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <title>Slider</title>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
+    integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+  <style>
+    .wrapper {
+      max-width: 800px;
+      height: 400px;
+      background: #000;
+      overflow: hidden;
+      position: relative;
+
+    }
+
+    .slide-img {
+      width: 3200px;
+      position: absolute;
+      /* left: -800px; */
+      transition: .5s;
+    }
+
+    .slide-img li {
+      height: 400px;
+      /* 加下面那兩個 是為了讓寬度不同的照片 有相同的空間 */
+      width: 0%;
+      flex-grow: 1;
+    }
+
+    .slide-img li img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+
+    }
+
+    .slide-page {
+      position: absolute;
+      bottom: 0;
+      justify-content: center;
+      width: 100%;
+
+      /* left: 50%; */
+      /* transform: translate(-50%, 0); */
+      /* width: 200px; */
+    }
+
+    .slide-page li {
+      width: 30px;
+      height: 15px;
+      margin: 10px;
+      border: 2px solid #fff;
+    }
+
+    .arrow {
+      position: absolute;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      top: 0;
+      bottom: 0;
+      width: 45px;
+      font-size: 30px;
+      cursor: pointer;
+    }
+
+    .arrowLeft {
+      left: 0
+    }
+
+    .arrowRight {
+      right: 0
+    }
+
+    .fas {
+      color: #fff;
+
+    }
+
+    /* .slide-page li:hover {
+      background-color: transparent;
+    } */
+  </style>
+
+</head>
+
+<body>
+  <div class="wrapper mx-auto">
+    <ul class="list-unstyled d-flex slide-img" id="slide-img">
+      <li><img src="images/slide1.jpeg" alt=""></li>
+      <li><img src="images/slide2.jpeg" alt=""></li>
+      <li><img src="images/slide3.jpeg" alt=""></li>
+      <li><img src="images/slide4.jpeg" alt=""></li>
+    </ul>
+    <ul class="list-unstyled d-flex slide-page" id="slide-page">
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+    </ul>
+    <!-- role="button" 改變語意 -->
+    <a class="arrowLeft arrow" role="button"><i class="fas fa-arrow-left"></i></a>
+    <a class="arrowRight arrow" role="button"><i class="fas fa-arrow-right"></i></a>
+  </div>
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+  <script>
+    let slideWidth = $('.wrapper').width();
+    let index = 0;
+    let slideCount = $('#slide-img li').length;
+    let goSlide = function () {
+      $('#slide-img').css('left', 0 - index * slideWidth)
+      // 停在哪張上 background 就在哪一顆
+      $('#slide-page li').eq(index).css('background', '#fff')
+      $('#slide-page li').eq(index).siblings().css('background', 'transparent')
+    }
+
+    // 一進來會有background
+    $('.slide-page li').eq(0).css('background', '#fff');
+
+    $('#slide-page li').on('click mouseenter', function () {
+      index = $(this).index();
+      goSlide();
+
+    })
+    $('.arrowLeft').click(function () {
+      index--;
+      //寫法1
+      if (index < 0) index = slideCount - 1;
+      goSlide();
+
+    })
+    $('.arrowRight').click(function () {
+      index++;
+      //寫法2
+      index > slideCount - 1 ? index = 0 : index
+      goSlide();
+
+    })
+
+
+  </script>
+</body>
+
+</html>

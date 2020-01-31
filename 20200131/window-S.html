@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <title>Window</title>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <style>
+    body {
+      height: 300vh;
+      transition: .5s;
+    }
+
+    .progressCon {
+      background: #ddd;
+      height: 50px;
+    }
+
+    .progressBar {
+      height: 50px;
+      background: pink;
+      width: 0%;
+
+    }
+  </style>
+</head>
+
+<body>
+  <div class="progressCon fixed-top">
+    <div class="progressBar"></div>
+  </div>
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+  <script>
+    // 能卷軸的範圍是 總高度 減 瀏覽器高度 (一定是超過一個瀏覽器高度才出現卷軸)
+    let windowHeight = $(window).height()
+    let bodyHeight = $('body').height();
+    // scrollHeight 就是能卷軸的範圍
+    let scrollHeight = bodyHeight - windowHeight
+    console.log(scrollHeight);
+
+    $(window).scroll(function () {
+      // console.log("scroll")
+      let scrollTop = $(this).scrollTop();
+      let progress = (scrollTop / scrollHeight) * 100 + '%';
+      $('.progressBar').css('width', progress);
+      scrollTop > scrollHeight / 2 ? $('body').css('background', 'orange') : $('body').css('background', 'none')
+    })
+  </script>
+</body>
+
+</html>
