@@ -12,7 +12,9 @@
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
     <style>
-
+        .table .active {
+            background: red;
+        }
     </style>
 </head>
 
@@ -59,14 +61,41 @@
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
     <script>
+        // let c = $(':checkbox:not(".all")')
+
+        // c.click(function () {
+        //     let a = $(this).closest('tr')
+        //     if ($(this).prop('checked')) {
+        //         a.css('background', 'red')
+        //     } else {
+        //         a.css('background', 'none')
+        //     }
+        //     if (c.length == $(':checkbox:not(".all"):checked').length) {
+        //         $('.all').prop('checked', true)
+        //     } else {
+        //         $('.all').prop('checked', false)
+        //     }
+        // })
+        // $('.all').click(function () {
+        //     let b = $(':checkbox:not(".all")').closest('tr')
+        //     if ($(this).prop('checked')) {
+        //         $(':checkbox:not(".all")').prop('checked', true)
+        //         b.css('background', 'red')
+        //     } else {
+        //         $(':checkbox:not(".all")').prop('checked', false)
+        //         b.css('background', 'none')
+        //     }
+        // })
+
+        //切換class
         let c = $(':checkbox:not(".all")')
 
         c.click(function () {
             let a = $(this).closest('tr')
             if ($(this).prop('checked')) {
-                a.css('background', 'red')
+                a.addClass('active')
             } else {
-                a.css('background', 'none')
+                a.removeClass('active')
             }
             if (c.length == $(':checkbox:not(".all"):checked').length) {
                 $('.all').prop('checked', true)
@@ -78,10 +107,10 @@
             let b = $(':checkbox:not(".all")').closest('tr')
             if ($(this).prop('checked')) {
                 $(':checkbox:not(".all")').prop('checked', true)
-                b.css('background', 'red')
+                b.addClass('active')
             } else {
                 $(':checkbox:not(".all")').prop('checked', false)
-                b.css('background', 'none')
+                b.removeClass('active')
             }
         })
     </script>

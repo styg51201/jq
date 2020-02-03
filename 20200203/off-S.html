@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-  <title>Photo Check</title>
+  <title>Off</title>
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -10,38 +10,15 @@
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  <style>
-    ul li {
-      width: 160px;
-      /* 先加border 不然第一次點下去圖會縮小 */
-      border: 4px solid transparent;
-    }
-
-    ul li.active {
-      border: 4px solid red;
-    }
-  </style>
 </head>
 
 <body>
   <div class="container">
-    <ul class="list-unstyled d-flex justify-content-center">
-      <li>
-        <img class="img-fluid" src="images/pic1.jpg" alt="">
-      </li>
-      <li>
-        <img class="img-fluid" src="images/pic2.jpg" alt="">
-      </li>
-      <li>
-        <img class="img-fluid" src="images/pic3.jpg" alt="">
-      </li>
-      <li>
-        <img class="img-fluid" src="images/pic4.jpg" alt="">
-      </li>
-      <li>
-        <img class="img-fluid" src="images/pic5.jpg" alt="">
-      </li>
-    </ul>
+    <button type="button" class="btn btn-primary" id="say">say</button>
+    <button type="button" class="btn btn-primary" id="on">on</button>
+    <button type="button" class="btn btn-primary" id="off">off</button>
+    <button type="button" class="btn btn-primary" id="one">one</button>
+
   </div>
   <!-- Optional JavaScript -->
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -55,16 +32,26 @@
     integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
     crossorigin="anonymous"></script>
   <script>
-    // $("ul li").click(function () {
-    //   $(this).css("border", "4px solid red")
-    //     .siblings().css("border", "4px solid transparent")
-    // })
+    let sayHello = function () {
+      console.log("say hello")
+    }
+    $("#say").click(function () {
 
-    // 切換class
-    $("ul li").click(function () {
-      $(this).addClass('active')
-        .siblings().removeClass("active");
     })
+    $("#on").click(function () {
+      //點很多次on的話 會重複綁定多個事件
+      //可以off 再on 事件 這樣就只會綁定一個了
+      $("#say").off("click", sayHello)
+      $("#say").on("click", sayHello)
+    })
+    //用off取消on的事件
+    $("#off").click(function () {
+      $("#say").off("click", sayHello)
+    })
+    //只執行一次事件
+    $("#one").one("click", sayHello)
+
+
   </script>
 </body>
 
