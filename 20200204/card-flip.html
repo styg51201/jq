@@ -35,6 +35,11 @@
     -webkit-transform: rotateY(180deg);
   }
 
+  .card.done {
+    transform: rotateY(180deg);
+    -webkit-transform: rotateY(180deg);
+  }
+
   .card img {
     width: 100%;
     position: absolute;
@@ -95,15 +100,33 @@
   <script src="https://code.jquery.com/jquery-3.2.1.min.js"
     integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
   <script>
-    $(".card").click(function () {
-      // $(this).toggleClass('active')
-      let opened = $('.card.active').length;
-      if (opened >= 2) {
-        $('.card.active').toggleClass('active')
+
+    let a = "";
+
+    $("body").on('click', '.card', function () {
+
+      if (!$(this).hasClass('done')) {
+
+        let opened = $('.card.active').length;
         $(this).toggleClass('active')
 
-      } else {
-        $(this).toggleClass('active')
+        if (opened >= 1) {
+          let b = $(this).find('.front').attr('src')
+
+          if (a == b) {
+            $('.card.active').off('click')
+            $('.card.active').removeClass('active').addClass('done')
+            a = "";
+
+          } else {
+            setTimeout(function () {
+              $('.card.active').toggleClass('active')
+            }, 500);
+          }
+        } else {
+          console.log(2)
+          a = $(this).find('.front').attr('src')
+        }
 
       }
     })

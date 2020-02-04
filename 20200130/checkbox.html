@@ -47,6 +47,11 @@
             </tr>
         </table>
         <input class="all" type="checkbox">全選
+        <br>
+        <input class="agree" type="checkbox"> 同意
+        <br>
+        <button type="button" class="btn btn-primary" disabled>送出</button>
+
     </div>
 
     <!-- Optional JavaScript -->
@@ -113,6 +118,12 @@
                 b.removeClass('active')
             }
         })
+        $('.agree').change(function () {
+            let check = $(this).prop('checked')
+            $('.btn').prop('disabled', !check)
+            console.log(1);
+        })
+
     </script>
 
 </body>

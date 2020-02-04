@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-  <title>Photo Check</title>
+  <title>CSS</title>
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -11,45 +11,38 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <style>
-    ul li {
-      width: 160px;
-      /* 先加border 不然第一次點下去圖會縮小 */
-      border: 4px solid transparent;
+    * {
+      /* box-sizing: border-box; */
     }
 
-    ul li.active {
-      border: 4px solid red;
+    .box {
+      width: 200px;
+      height: 200px;
+      padding: 10px;
+      background: lightcoral;
+      transition: .5s;
+      overflow: auto;
     }
 
-    figure {
-      display: flex;
-      justify-content: center;
+    .bar {
+      width: 40px;
+      height: 600px;
+      background: darkcyan;
     }
   </style>
 </head>
 
 <body>
   <div class="container">
-    <figure class="">
-      <img class="showImg" src="images/pic1.jpg" alt="">
-    </figure>
-    <ul class="list-unstyled d-flex justify-content-center">
-      <li class="active">
-        <img class="img-fluid" src="images/pic1.jpg" alt="">
-      </li>
-      <li>
-        <img class="img-fluid" src="images/pic2.jpg" alt="">
-      </li>
-      <li>
-        <img class="img-fluid" src="images/pic3.jpg" alt="">
-      </li>
-      <li>
-        <img class="img-fluid" src="images/pic4.jpg" alt="">
-      </li>
-      <li>
-        <img class="img-fluid" src="images/pic5.jpg" alt="">
-      </li>
-    </ul>
+    <div class="py-2">
+      <button type="button" class="btn btn-primary" id="get">get</button>
+      <button type="button" class="btn btn-primary" id="set">set</button>
+      <button type="button" class="btn btn-primary" id="setTop">set scrollTop</button>
+
+    </div>
+    <div class="box">
+      <div class="bar"></div>
+    </div>
   </div>
   <!-- Optional JavaScript -->
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -63,17 +56,22 @@
     integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
     crossorigin="anonymous"></script>
   <script>
-    // $("ul li").click(function () {
-    //   $(this).css("border", "4px solid red")
-    //     .siblings().css("border", "4px solid transparent")
-    // })
+    $("#get").click(function () {
+      console.log("width: " + $(".box").width())
+      console.log("innerWidth: " + $(".box").innerWidth())
+    })
+    $("#set").click(function () {
+      $(".box").width(300)
+      // $(".box").css("width", "300px")
 
-    // 切換class
-    $("ul li").click(function () {
-      $(this).addClass('active')
-        .siblings().removeClass("active");
-      let src = $(this).find('img').attr('src');
-      $('.showImg').attr('src', src);
+    })
+    $(".box").scroll(function () {
+      let scrollTop = $(this).scrollTop()
+      console.log(scrollTop)
+    })
+    //到指定的位置
+    $("#setTop").click(function () {
+      $(".box").scrollTop(50)
     })
   </script>
 </body>
