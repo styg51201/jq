@@ -26,8 +26,8 @@
     <div class="py-2 d-flex justify-content-end">
       <div class="btn-group" role="group" aria-label="Basic example">
         <button type="button" class="btn btn-secondary" id="btn-s">S</button>
-        <button type="button" class="btn btn-secondary active">M</button>
-        <button type="button" class="btn btn-secondary">L</button>
+        <button type="button" class="btn btn-secondary active" id="btn-m">M</button>
+        <button type="button" class="btn btn-secondary" id="btn-l">L</button>
       </div>
     </div>
     <h2>jQuery</h2>
@@ -56,23 +56,64 @@
     integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
     crossorigin="anonymous"></script>
   <script>
-    $(".btn").click(function () {
+    //字型大小加在body裡 只有內文被改變 因為標題的大小是rem 是根據html的大小
+    // $('#btn-s').click(function () {
+    //   $('body').removeClass();
+    //   $('body').addClass('fontS');
+    //   $('button').removeClass('active');
+    //   $(this).addClass('active');
+    // })
+    // $('#btn-l').click(function () {
+    //   $('body').removeClass();
+    //   $('body').addClass('fontL');
+    //   $('button').removeClass('active');
+    //   $(this).addClass('active');
+    // })
+    // $('#btn-m').click(function () {
+    //   $('body').removeClass();
+    //   $('button').removeClass('active');
+    //   $(this).addClass('active');
+    // })
+
+    //字型大小加在html裡 全部都會改變
+    // $('#btn-s').click(function () {
+    //   $('html').removeClass();
+    //   $('html').addClass('fontS');
+    //   $('button').removeClass('active');
+    //   $(this).addClass('active');
+    // })
+    // $('#btn-l').click(function () {
+    //   $('html').removeClass();
+    //   $('html').addClass('fontL');
+    //   $('button').removeClass('active');
+    //   $(this).addClass('active');
+    // })
+    // $('#btn-m').click(function () {
+    //   $('html').removeClass();
+    //   $('button').removeClass('active');
+    //   $(this).addClass('active');
+    // })
+
+    //老師寫法
+    $('.btn').click(function () {
       let size = $(this).text();
-      // console.log(size)
       switch (size) {
-        case "S":
-          $("body").removeClass().addClass("fontS")
+        case 'S':
+          $('body').removeClass().addClass('fontS')
           break;
-        case "M":
-          $("body").removeClass()
+        case 'M':
+          $('body').removeClass()
           break;
-        case "L":
-          $("body").removeClass().addClass("fontL")
+        case 'L':
+          $('body').removeClass().addClass('fontL')
           break;
       }
-      $(this).addClass("active")
-        .siblings().removeClass("active")
+      $(this).addClass('active')
+        .siblings().removeClass('active')
     })
+
+
+
   </script>
 </body>
 
