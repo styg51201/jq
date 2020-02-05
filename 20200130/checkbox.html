@@ -111,14 +111,15 @@
         $('.all').click(function () {
             let b = $(':checkbox:not(".all")').closest('tr')
             if ($(this).prop('checked')) {
-                $(':checkbox:not(".all")').prop('checked', true)
+                //加change() 能夠觸發.agree的change事件 
+                $(':checkbox:not(".all")').prop('checked', true).change()
                 b.addClass('active')
             } else {
-                $(':checkbox:not(".all")').prop('checked', false)
+                $(':checkbox:not(".all")').prop('checked', false).change()
                 b.removeClass('active')
             }
         })
-        $(document).on('change', '.agree', function () {
+        $('.agree').change(function () {
             let check = $(this).prop('checked')
             $('.btn').prop('disabled', !check)
             console.log(1);
