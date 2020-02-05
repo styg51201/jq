@@ -118,11 +118,12 @@
                 b.removeClass('active')
             }
         })
-        $('.agree').change(function () {
+        $(document).on('change', '.agree', function () {
             let check = $(this).prop('checked')
             $('.btn').prop('disabled', !check)
             console.log(1);
         })
+
 
     </script>
 

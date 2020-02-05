@@ -1,65 +1,140 @@
 <!doctype html>
 <html lang="en">
-  <head>
+
+<head>
     <title>HTML</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  </head>
-  <body>
-      <div class="container">
-          <div class="py-2">
-              <button type="button" class="btn btn-primary" id="getTxt">getTxt</button>
-              <button type="button" class="btn btn-primary" id="setTxt">setTxt</button>
-              <button type="button" class="btn btn-primary" id="getHtml">getHtml</button>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
 
-          </div>
-          <h1 id="source">Hello <span class="text-danger">World!!</span></h1>
-          <h1 id="target"></h1>
-          <h2>.attr()</h2>
-          <div class="py-2">
-              <button type="button" class="btn btn-primary" id="getAttr">getAttr</button>
-              <button type="button" class="btn btn-primary" id="setAttr">setAttr</button>
-          </div>
-          <a id="link" href="http://www.google.com" title="google">google</a>
-      </div>
+<body>
+    <div class="container">
+        <div class="py-2">
+            <button type="button" class="btn btn-primary" id="getTxt">getTxt</button>
+            <button type="button" class="btn btn-primary" id="setTxt">setTxt</button>
+            <button type="button" class="btn btn-primary" id="getHtml">getHtml</button>
+
+        </div>
+        <h1 id="source">Hello <span class="text-danger">World!!</span></h1>
+        <h1 id="target"></h1>
+        <h2>.attr()</h2>
+        <div class="py-2">
+            <button type="button" class="btn btn-primary" id="getAttr">getAttr</button>
+            <button type="button" class="btn btn-primary" id="setAttr">setAttr</button>
+        </div>
+        <a id="link" href="http://www.google.com" title="google">google</a>
+        <h2>.prop()</h2>
+        <div class="py-2">
+            <button type="button" class="btn btn-primary" id="getProp">getProp</button>
+            <button type="button" class="btn btn-primary" id="setProp">setProp</button>
+        </div>
+        <input type="checkbox">
+        <div class="py-1">
+
+            <button type="submit" class="btn btn-primary" id="submit" disabled>送出</button>
+        </div>
+        <h2>.val()</h2>
+        <div class="py-2">
+            <button type="button" class="btn btn-primary" id="getVal">getVal</button>
+            <button type="button" class="btn btn-primary" id="setVal">setVal</button>
+
+        </div>
+        <input type="text" class="form-control" placeholder="請輸入稱呼" id="input">
+        <select class="form-control" name="" id="select">
+            <option value="">請選擇縣市</option>
+            <option value="0">台北市</option>
+            <option value="1">新北市</option>
+            <option value="2">桃園市</option>
+            <option value="3">台南市</option>
+            <option value="4">高雄市</option>
+        </select>
+        <div class="py-2">
+            Hello, <span id="inputName"></span>, 歡迎來到 <span id="city"></span>
+        </div>
+    </div>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
     <script>
-        $("#getTxt").click(function(){
-            let content=$("#source").text();
+        $("#getTxt").click(function () {
+            let content = $("#source").text();
             console.log(content)
             $("#target").text(content)
         })
-        $("#setTxt").click(function(){
+        $("#setTxt").click(function () {
             $("#source").text("new content")
         })
-        $("#getHtml").click(function(){
-            let content=$("#source").html();
+        $("#getHtml").click(function () {
+            let content = $("#source").html();
             console.log(content)
             $("#target").html(content)
             // $("#target").text(content)
         })
-        $("#getAttr").click(function(){
-            let link=$("#link").attr("href"), title=$("#link").attr("title")
-            console.log("link: "+link)
-            console.log("title: "+title)
+        $("#getAttr").click(function () {
+            let link = $("#link").attr("href"), title = $("#link").attr("title")
+            console.log("link: " + link)
+            console.log("title: " + title)
 
         })
-        $("#setAttr").click(function(){
-            let attr={
+        $("#setAttr").click(function () {
+            let attr = {
                 "href": "https://www.facebook.com",
                 "title": "facebook"
             }
-            
+
             $("#link").attr(attr).text("facebook")
         })
+
+        $("#getProp").click(function () {
+            let checked = $(":checkbox").prop("checked")
+
+        })
+        $("#setProp").click(function () {
+            $(":checkbox").prop("checked", true)
+        })
+
+        $(":checkbox").click(function () {
+            let checked = $(this).prop("checked")
+            $("#submit").prop("disabled", !checked)
+        })
+
+        $("#getVal").click(function () {
+            let content = $(":text").val()
+            console.log(content)
+        })
+        $("#input").on("change keyup", function () {
+            let content = $(this).val()
+            console.log(content)
+            $("#inputName").text(content)
+        })
+
+        $("#select").change(function () {
+            let value = $(this).val();
+            // :selected 被選取的
+            let content = $(this).find(":selected").text();
+            console.log("value:" + value + ", content: " + content)
+            $("#city").text(content)
+        })
+        //給值
+        $("#setVal").click(function () {
+            $("#input").val("Joe")
+            $("#select").val(2)
+
+        })
     </script>
-  </body>
+</body>
+
 </html>
