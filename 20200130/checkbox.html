@@ -93,36 +93,40 @@
         // })
 
         //切換class
-        let c = $(':checkbox:not(".all")')
+        let list = $('table :checkbox')
+        list.click(function () {
+            let listTr = $(this).closest('tr')
+            let count = $('table :checked').length
 
-        c.click(function () {
-            let a = $(this).closest('tr')
             if ($(this).prop('checked')) {
-                a.addClass('active')
+                listTr.addClass('active')
             } else {
-                a.removeClass('active')
+                listTr.removeClass('active')
             }
-            if (c.length == $(':checkbox:not(".all"):checked').length) {
+
+            if (list.length == count) {
                 $('.all').prop('checked', true)
             } else {
                 $('.all').prop('checked', false)
             }
         })
+
         $('.all').click(function () {
-            let b = $(':checkbox:not(".all")').closest('tr')
-            if ($(this).prop('checked')) {
+            // let b = $(':checkbox:not(".all")').closest('tr')
+            let checkAll = $(this).prop('checked')
+
+            if (checkAll) {
                 //加change() 能夠觸發.agree的change事件 
-                $(':checkbox:not(".all")').prop('checked', true).change()
-                b.addClass('active')
+                $(':checkbox:not(".all")').prop('checked', checkAll).change()
+                $('table tr').addClass('active')
             } else {
-                $(':checkbox:not(".all")').prop('checked', false).change()
-                b.removeClass('active')
+                $(':checkbox:not(".all")').prop('checked', checkAll).change()
+                $('table tr').removeClass('active')
             }
         })
         $('.agree').change(function () {
-            let check = $(this).prop('checked')
-            $('.btn').prop('disabled', !check)
-            console.log(1);
+            let checkAgree = $(this).prop('checked')
+            $('.btn').prop('disabled', !checkAgree)
         })
 
 

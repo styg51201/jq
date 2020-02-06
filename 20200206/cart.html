@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style>
+        p.active {
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row justify-content-center">
+            <table class="table table-bordered table-sm text-center col-md-8">
+                <thead>
+                    <tr>
+                        <th>品名</th>
+                        <th>單價</th>
+                        <th style="width:200px;">數量</th>
+                        <th>小計</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>蘋果</td>
+                        <td>25</td>
+                        <td>
+                            <input type="number" class="form-control" min="0">
+                        </td>
+                        <td class="cost">0</td>
+                    </tr>
+                    <tr>
+                        <td>香蕉</td>
+                        <td>30</td>
+                        <td>
+                            <input type="number" class="form-control" min="0">
+                        </td>
+                        <td class="cost">0</td>
+                    </tr>
+                </tbody>
+                <tfoot class="text-right">
+                    <tr>
+                        <td colspan="4">
+                            <p>運費 : <span>0</span>
+                                <br><span></span>
+                            </p>
+                            <p>總計 : <span>0</span></p>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+
+    <script>
+
+
+        $('table').on('change keyup', 'input', function () {
+            let totalCost = 0;
+            let cost = $(this).closest('tr').find('td').eq(3)
+            let price = $(this).closest('tr').find('td').eq(1).text()
+            let count = $(this).val()
+            let costNumber = eval(price * count)
+            // console.log(price, count, cost)
+            cost.text(costNumber)
+
+            $('.cost').each(function () {
+                totalCost += eval($(this).text())
+                console.log(totalCost)
+            })
+
+
+            if (totalCost < 500) {
+                $('tfoot span').eq(0).text(60)
+                $('tfoot span').eq(2).text(eval(totalCost + 60))
+                $('tfoot span').eq(1).text("")
+                $('tfoot p').eq(0).removeClass('active')
+
+            } else {
+                $('tfoot span').eq(0).text(0)
+                $('tfoot span').eq(1).text('(500元以上免運費)')
+                $('tfoot span').eq(2).text(totalCost)
+                $('tfoot p').eq(0).addClass('active')
+            }
+        })
+    </script>
+</body>
+
+</html>

@@ -103,8 +103,15 @@
 
     let a = "";
 
-    $("body").on('click', '.card', function () {
+    //$('body').on('click','.card',function)
+    //事件是綁在body上 對子層的.card執行
+    //所以下面的 $('.card.active').off('click') 沒辦法取消  因為事件在body身上
+    // $(".card").on('click', function () {
+    //依照class分類 比較好
 
+    $('body').on('click', '.card', function () {
+
+      //class分類
       if (!$(this).hasClass('done')) {
 
         let opened = $('.card.active').length;
@@ -114,7 +121,8 @@
           let b = $(this).find('.front').attr('src')
 
           if (a == b) {
-            $('.card.active').off('click')
+
+            // $('.card.active').off('click')
             $('.card.active').removeClass('active').addClass('done')
             a = "";
 
@@ -129,6 +137,7 @@
         }
 
       }
+
     })
   </script>
 </body>
