@@ -22,32 +22,48 @@
                     <th>品名</th>
                     <th>單價</th>
                     <th width="200px">數量</th>
-                    <th>總價</th>
+                    <th>小計</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
+                <tr class="product">
                     <td>蘋果</td>
                     <td class="price text-right">20</td>
                     <td>
-                        <input type="number" class="form-control number text-right" min="0">
+                        <input type="number" class="form-control number text-right" min="0" value="1">
                     </td>
-                    <td>
-                        <span class="text-right s_price"></span>
+                    <td class="text-right">
+                        <span class="s_price"></span>
                     </td>
                 </tr>
-                <tr>
+                <tr class="product">
                     <td>香蕉</td>
                     <td class="price text-right">16</td>
                     <td>
-                        <input type="number" class="form-control number text-right" min="0">
+                        <input type="number" class="form-control number text-right" min="0" value="2">
                     </td>
-                    <td>
-                        <span class="text-right s_price"></span>
+                    <td class="text-right">
+                        <span class="s_price"></span>
                     </td>
                 </tr>
+                <tr class="product">
+                  <td>橘子</td>
+                  <td class="price text-right">35</td>
+                  <td>
+                      <input type="number" class="form-control number text-right" min="0" value="1">
+                  </td>
+                  <td class="text-right">
+                      <span class=" s_price"></span>
+                  </td>
+              </tr>
             </tbody>
             <tfoot>
+              <tr>
+                <td colspan="4" class="text-right">
+                    運費:
+                    <span id="ship">60</span>
+                </td>
+            </tr>
                 <tr>
                     <td colspan="4" class="text-right">
                         總價:
@@ -62,7 +78,45 @@
         crossorigin="anonymous"></script>
 
     <script>
-        
+        $(".number").on("keyup change", function(event){
+          $(this).val($(this).val().replace(/[^\d].+/, ""));
+          if ((event.which < 48 || event.which > 57)) {
+              event.preventDefault();
+          }
+          if($(this).val()=="")$(this).val(0)
+          $(this).val(parseFloat($(this).val()))
+          // let row=$(this).closest("tr");
+          // let number=$(this).val();
+          // let price=row.find(".price").text()
+          // let s_price=eval(number * price);
+          // let total=0;
+          // row.find(".s_price").text(s_price)
+          // $(".s_price").each(function(){
+          //   total+=Number($(this).text())
+          // })
+          // $("#total").text(total)
+          total()
+        })
+
+        total()
+        function total(){
+          let total=0;
+          let shipment=60;
+          $(".product").each(function(){
+            row=$(this);
+            let number=row.find(".number").val();
+            let price=row.find(".price").text()
+            let s_price=eval(number * price);
+            row.find(".s_price").text(s_price)
+            total+=Number(s_price)
+          });
+          if(total>=500){
+            shipment=0;
+          }
+          total+=shipment;
+          $("#ship").text(shipment)
+          $("#total").text(total)
+        }
     </script>
 </body>
 

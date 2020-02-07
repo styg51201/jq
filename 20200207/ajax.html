@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>ajax</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>地圖</th>
+                            <th>學校數</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"
+        integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <script>
+        // ajax時  可以寫loading icon 開始
+        $.ajax({
+            method: "GET",
+            url: "map.json",
+            dataType: "json"
+        }).done(function (response) {
+            console.log(response)
+            response.forEach(function (map) {
+                let row = `<tr>
+                    <td>${map.name_tw}</td>
+                    <td>${map.count}</td>
+                    </tr>`
+                $("tbody").append(row)
+            })
+
+        }).fail(function () {
+            alert("error");
+        }).always(function () {
+            console.log("complete");
+            //可以寫loading icon 結束
+        });
+
+    </script>
+</body>
+
+</html>

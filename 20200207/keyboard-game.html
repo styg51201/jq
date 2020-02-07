@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Cat Walk</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css">
+  <style>
+    .map{
+      position: relative;
+      width:640px;
+      height:480px;
+      margin: 20px auto;
+      background: url(images/map.png);
+    }
+    .cat{
+      position: absolute;
+      left:0;
+      top:0;
+      width:184px;   
+      height:200px;   
+      margin:2% auto;   
+      background: url(images/cat.png) left top;
+      transform-origin: left top;
+      transform: scale(.4);
+    }  
+    @keyframes play {  
+       100% { background-position: -1658px; }   
+    }
+    .cat{   
+        animation: play .8s steps(9) infinite;   
+        -webkit-animation: play .8s steps(9) infinite;   
+    }
+  </style>
+</head>
+<body>
+    <div class="py-2 text-center">
+        <button type="button" class="btn btn-primary" data-speed="up">加速</button>
+        <button type="button" class="btn btn-primary" data-speed="down">減速</button>
+    </div>
+  <div class="map">
+    <div class="cat"></div>
+  </div><!-- map -->
+  <script
+  src="https://code.jquery.com/jquery-3.2.1.min.js"
+  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+  crossorigin="anonymous"></script>
+  <script>
+      let speed=3;
+    $("body").keydown(function(event){
+        let keycode=event.which;
+        switch(keycode){
+            case 38: //
+                $(".cat").css("top", "-="+speed)
+                break;
+            case 39:
+                $(".cat").css("left", "+="+speed)
+                break;
+            case 40:
+            $(".cat").css("top", "+="+speed)
+
+                break;
+            case 37:
+            $(".cat").css("left", "-="+speed)
+
+                break;
+        }
+
+    })
+    
+    $(".btn").click(function(){
+      let speedUpDown=$(this).data("speed")
+      switch(speedUpDown){
+        case "up":
+          speed+=2;
+        break;
+        case "down":
+          speed-=2;
+        break;
+      }
+    })
+
+  </script>
+</body>
+</html>

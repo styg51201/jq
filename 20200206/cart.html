@@ -34,17 +34,17 @@
                         <td>蘋果</td>
                         <td>25</td>
                         <td>
-                            <input type="number" class="form-control" min="0">
+                            <input type="number" class="form-control" min="0" value="1">
                         </td>
-                        <td class="cost">0</td>
+                        <td class="cost"></td>
                     </tr>
                     <tr>
                         <td>香蕉</td>
                         <td>30</td>
                         <td>
-                            <input type="number" class="form-control" min="0">
+                            <input type="number" class="form-control" min="0" value="1">
                         </td>
-                        <td class="cost">0</td>
+                        <td class="cost"></td>
                     </tr>
                 </tbody>
                 <tfoot class="text-right">
@@ -76,19 +76,59 @@
 
 
         $('table').on('change keyup', 'input', function () {
+
+            // let totalCost = 0;
+            // let cost = $(this).closest('tr').find('td').eq(3)
+            // let price = $(this).closest('tr').find('td').eq(1).text()
+            // let count = $(this).val()
+            // let costNumber = eval(price * count)
+            // // console.log(price, count, cost)
+            // cost.text(costNumber)
+
+            // $('.cost').each(function () {
+            //     totalCost += eval($(this).text())
+            //     console.log(totalCost)
+            // })
+
+
+            // if (totalCost < 500) {
+            //     $('tfoot span').eq(0).text(60)
+            //     $('tfoot span').eq(2).text(eval(totalCost + 60))
+            //     $('tfoot span').eq(1).text("")
+            //     $('tfoot p').eq(0).removeClass('active')
+
+            // } else {
+            //     $('tfoot span').eq(0).text(0)
+            //     $('tfoot span').eq(1).text('(500元以上免運費)')
+            //     $('tfoot span').eq(2).text(totalCost)
+            //     $('tfoot p').eq(0).addClass('active')
+            // }
+
+            //不能打特殊符號 回到""空字串
+            $(this).val($(this).val().replace(/[^\d].+/, ""));
+            if ((event.which < 48 || event.which > 57)) {
+                event.preventDefault();
+            }
+            //再讓空字串變成0
+            if ($(this).val() == "") $(this).val(0)
+            $(this).val(parseFloat($(this).val()))
+
+            acc()
+        })
+
+        let acc = function () {
+
+            // function abb() {
             let totalCost = 0;
-            let cost = $(this).closest('tr').find('td').eq(3)
-            let price = $(this).closest('tr').find('td').eq(1).text()
-            let count = $(this).val()
-            let costNumber = eval(price * count)
-            // console.log(price, count, cost)
-            cost.text(costNumber)
 
-            $('.cost').each(function () {
-                totalCost += eval($(this).text())
-                console.log(totalCost)
+            $('tbody tr').each(function () {
+                let cost = $(this).find('td').eq(3)
+                let count = $(this).find('td').eq(2).find('input').val()
+                let price = $(this).find('td').eq(1).text()
+                let costNumber = eval(price * count)
+                cost.text(costNumber)
+                totalCost += eval(cost.text())
             })
-
 
             if (totalCost < 500) {
                 $('tfoot span').eq(0).text(60)
@@ -102,7 +142,11 @@
                 $('tfoot span').eq(2).text(totalCost)
                 $('tfoot p').eq(0).addClass('active')
             }
-        })
+        }
+
+        acc();
+        // abb()
+
     </script>
 </body>
 

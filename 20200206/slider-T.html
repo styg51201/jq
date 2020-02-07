@@ -21,8 +21,9 @@
         }
 
         .slider-img {
-            width: 3200px;
-            left: 0;
+            /* 限制了寬度 每加一張都破版 */
+            /* width: 3200px; */
+            left: 0px;
             transition: .5s;
         }
 
@@ -86,19 +87,9 @@
 <body>
     <div class="wrapper mx-auto position-relative">
         <ul class="list-unstyled d-flex slider-img position-absolute" id="sliderImg">
-            <li><img src="images/slide1.jpeg" alt=""></li>
-            <li><img src="images/slide2.jpeg" alt=""></li>
-            <li><img src="images/slide3.jpeg" alt=""></li>
-            <li><img src="images/slide4.jpeg" alt=""></li>
-            <li><img src="images/pic1.jpg" alt=""></li>
 
         </ul>
         <ul class="list-unstyled slider-dots position-absolute d-flex justify-content-center" id="sliderDots">
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
 
         </ul>
         <a class="position-absolute arrow d-flex justify-content-center align-items-center arrow-l" role="button"
@@ -122,9 +113,22 @@
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
     <script>
-        let slideWidth = $(".slider-img li").width();
+        let arrImg = ['slide1.jpeg', 'slide2.jpeg', 'slide3.jpeg', 'slide4.jpeg', 'pic1.jpg']
+
+        for (let i = 0; i < arrImg.length; i++) {
+            $('.slider-img').append(`<li><img src="../images/${arrImg[i]}" alt=""></li>`)
+            $('.slider-dots').append('<li></li>')
+        }
+
+        // 因為ul沒設寬度 所以li寬度是0
+        //改取.wrapper的寬度 因為顯示的寬度 跟li 一樣
+        // let slideWidth = $(".slider-img li").width();
+        let slideWidth = $(".wrapper").width();
         let slideCount = $(".slider-img li").length;
         let index = 0;
+
+        //讓ul的寬度= li寬度*li個數
+        $('.slider-img').width(slideWidth * slideCount);
         // console.log(slideWidth)
         // console.log(slideWidth)
         $("#sliderDots li").eq(0).css("background", "#fff")
@@ -136,6 +140,7 @@
             // $(this).css("background", "#fff")
             // .siblings().css("background", "transparent")
             goSlide()
+            console.log(index)
 
         })
         $("#goPrev").click(function () {
