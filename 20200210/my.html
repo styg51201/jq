@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- lightbox -->
+    <link href="dist/css/lightbox.min.css" rel="stylesheet" />
+</head>
+<div class="container">
+    <h1>this is title</h1>
+</div>
+
+<body>
+    <div class="container">
+        <div class="p2">
+            <a href="../images/pic5.jpg" data-lightbox="images" data-title="照片1" data-alt="照片"><img
+                    src="../images/pic5.jpg" alt=""></a>
+        </div>
+        <a href="../images/pic1.jpg" data-lightbox="images1" data-title="照片1">open</a>
+        <a href="../images/pic2.jpg" data-lightbox="images1" data-title="照片2"></a>
+        <a href="../images/pic3.jpg" data-lightbox="images1" data-title="照片3"></a>
+    </div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <!-- lightbox -->
+    <script src="dist/js/lightbox.min.js"></script>
+
+    <script src="my.js"></script>
+
+    <script>
+        // $('h1').my();
+        //帶參數進去 沒帶是預設
+        $('h1').my({ color: 'blue', backgroundColor: 'yellow' });
+    </script>
+
+    <script>
+        lightbox.option({
+            'resizeDuration': 500,
+            'wrapAround': true,
+            'albumLabel': "第 %1 張 ; 共 %2 張"
+        })
+    </script>
+</body>
+
+</html>

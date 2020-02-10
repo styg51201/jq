@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+    <style>
+        img {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row my-3 items">
+
+        </div>
+        <div class="row justify-content-center mt-5">
+            <div class="card col-lg-6 p-3">
+                <h3 class="text-center">購物車</h3>
+                <table class="table">
+                    <thead>
+
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+                    <tfoot class="text-danger">
+
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <script>
+
+        // 計算全部
+        let cartTotal = function () {
+            let total = 0
+            for (i = 0; i < $('tbody tr').length; i++) {
+                let price = $('tbody tr').eq(i).find('td').eq(1).text()
+                let count = $('tbody tr').eq(i).find('td .count').val()
+                let subtotal = Number(price) * Number(count)
+                $('tbody tr').eq(i).find('td').eq(3).text(subtotal)
+                total += subtotal
+            }
+            $('.allTotal').text(total)
+        }
+
+        //取得商品資訊
+        $.ajax({
+            url: 'food.json',
+            type: 'GET',
+            dataType: 'json'
+        })
+            .done(function (item) {
+                let i = 0
+                item.forEach(function (data) {
+
+                    let pushItem = `<div class="col-md-3">
+                <div class="card p-3" data-id="${i}">
+                    <img src="./images/${data['image']}" alt="">
+                    <h4>${data['name']}</h4>
+                    <p class="h5 text-danger">$<span>${data['price']}</span></p>
+                    <button class="btn btn-info add"><i class="fas fa-plus"></i></button>
+                </div>
+            </div>`
+                    $('.items').append(pushItem)
+                    i++
+                })
+            })
+
+        //加入購物車
+        $('body').on('click', '.add', function () {
+
+            //用來判斷購物車裡是否有相同商品
+            let idHas = false;
+
+            let id = $(this).parents('.card').data('id')
+            let name = $(this).parents('.card').find('h4').text()
+            let price = $(this).parents('.card').find('span').text()
+
+            //判斷購物車裡的每一行  有相同的話轉為true
+            for (i = 0; i < $('tbody tr').length; i++) {
+                if ($('tbody tr').eq(i).data('id') == id) {
+                    idHas = true;
+                    break;
+                }
+            }
+
+            //新增 thead 和 tfoot
+            $('thead').html(`<tr>
+                            <th>品名</th>
+                            <th>單價</th>
+                            <th>數量</th>
+                            <th>小計</th>
+                            <th>刪除</th>
+                        </tr>`)
+
+            $('tfoot').html(`<tr>
+                            <td>總計 : </td>
+                            <td></td>
+                            <td></td>
+                            <td class="allTotal"></td>
+                            <td><button class="btn btn-primary">結帳</button></td>
+                        </tr>`)
+
+            //有相同商品 則數量+1
+            if (idHas) {
+                let count = $('tr[data-id=' + id + ']').find('input').val()
+                $('tr[data-id=' + id + ']').find('input').val(Number(count) + 1)
+
+                //再進行計算
+                cartTotal();
+
+
+                //沒有則入購物車
+            } else {
+                let cartInfo = `<tr data-id="${id}">
+                            <td>${name}</td>
+                            <td>${price}</td>
+                            <td><input class="count" type="number" min="0" class="form-control" value="1"></td>
+                            <td class="subtotal">${price}</td>
+                            <td><button class="btn btn-danger delete"><i class="fas fa-trash"></i></button></td>
+                        </tr>`
+                $('tbody').append(cartInfo)
+                cartTotal();
+            }
+        })
+        //input 改變時計算總額
+        $('body').on('click change', '.count', function () {
+            cartTotal()
+        })
+
+        //刪除時也計算總額 若購物車為0 , thead和tfoot 清空
+        $('body').on('click', '.delete', function () {
+            $(this).parents('tr').remove()
+            cartTotal();
+
+            if ($('tbody tr').index() < 0) {
+                $('thead').empty()
+                $('tfoot').empty()
+            }
+        })
+
+
+
+
+    </script>
+</body>
+
+</html>
